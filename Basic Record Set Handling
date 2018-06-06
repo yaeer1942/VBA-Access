@@ -1,0 +1,33 @@
+'RecordSet Definitions
+'----------------------
+option Compare Database
+Option explicit
+
+dim db as Database
+dim rs as Recordset 'Declaring the variables outside the Sub
+
+______________________________
+
+Private Sub FormLoad()
+    set db = CurrentDb
+    set rs = db.OpenRecordset("QuaryName",??,??)
+    
+    Do Until rs.EOF 'End Of File
+        Me.FormList.AddItem rs("UserName")
+        rs.MoveNext
+    Loop
+    
+End Sub
+
+
+'RecordSet Editing:
+'------------------
+
+Private Sub ButtunName_Click() 'Usually "Save Button"
+
+rs.Edit 'Putting RecordSet in Edit Mode
+rs!FirstName = Me.txtFirstName 'rs to the value of the textbox
+rs!LastName = Me.txtLastName
+rs!Update 'Saving the Change in the rs
+
+End Sub
